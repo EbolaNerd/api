@@ -3,6 +3,7 @@ import User from "../models/user";
 import { validateAge } from "../utils/calculator";
 const router: Router = express.Router();
 
+//In-mem users repo
 const users: User[] = [];
 
 router.get("/", (req: Request, res: Response) => {
