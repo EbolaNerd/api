@@ -18,10 +18,10 @@ describe("Calculator", () => {
       });
 
       it("should return false if age is below 18", () => {
-         const age = 18;
+         const age = 15;
          const result = validateAge(age);
 
-         expect(result).toBe(true);
+         expect(result).toBe(false);
       });
    });
 });
