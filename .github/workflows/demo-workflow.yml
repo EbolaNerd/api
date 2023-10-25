@@ -1,7 +1,22 @@
 name: Demo Workflow
-on: [workflow_dispatch]
+on: workflow_dispatch
 jobs:
    Test:
       runs-on: ubuntu-latest
       steps:
-         - run: echo "Simulating your test!"
+         - uses: actions/checkout@v3
+         - name: Run test
+           run: npm run test
+   build:
+      needs: Test
+      runs-on: ubuntu-latest
+      steps:
+         - name: Get code
+           uses: actions/checkout@v3
+         - name: Build service
+           run: npm run build
+         - name: Upload artifacts
+           uses: actions/upload-artifact@v3
+           with:
+              name: dist-files
+              path: dist
