@@ -3,11 +3,11 @@ RUN addgroup app && adduser -S -G app app
 USER app
 WORKDIR /app
 COPY --chown=app:app package*.json ./
-ENV PORT=3002
+ENV PORT=3000
 RUN npm install
 COPY --chown=app:app . .
 
 
-EXPOSE 3002 
+EXPOSE 3000 
 
 CMD ["npm", "start"]
