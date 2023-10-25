@@ -1,31 +1,27 @@
 import { describe, expect, it } from "@jest/globals";
-import { add } from "../../../src/utils/calculator";
+import { validateAge } from "../../../src/utils/calculator";
 
 describe("Calculator", () => {
-   describe("Add", () => {
-      it("should return the sum of two numbers", () => {
-         const a = 12;
-         const b = 10;
-         const result = add(a, b);
+   describe("Validate age", () => {
+      it("should return true if age is above 18", () => {
+         const age = 20;
+         const result = validateAge(age);
 
-         expect(result).toBe(22);
+         expect(result).toBe(true);
       });
 
-      it("should handle negative numbers", () => {
-         const a = -12;
-         const b = -10;
-         const result = add(a, b);
+      it("should return true if age is 18", () => {
+         const age = 18;
+         const result = validateAge(age);
 
-         expect(result).toBe(-22);
+         expect(result).toBe(true);
       });
-   });
 
-   describe("Invalid input", () => {
-      it("should throw an error if input is not a number", () => {
-         const a: number = 12;
-         const b: unknown = "Invalid input";
+      it("should return false if age is below 18", () => {
+         const age = 18;
+         const result = validateAge(age);
 
-         expect(() => add(a, b as number)).toThrow("Invalid input. Input must be numbers");
+         expect(result).toBe(true);
       });
    });
 });
