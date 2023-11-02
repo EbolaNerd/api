@@ -1,0 +1,22 @@
+on: workflow_dispatch
+name: Azure container deploy
+
+jobs:
+   build-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
+         - name: "Login via Azure CLI"
+           uses: azure/login@v1
+           with:
+              creds: ${{ secrets.AZURE_CREDENTIALS }}
+         - name: "Deploy to Azure Container Instances"
+           uses: "azure/aci-deploy@v1"
+           with:
+              resource-group: ${{ secrets.RESOURCE_GROUP }}
+              dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+              image: adelongnsw/api
+              registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+              registry-username: ${{ secrets.REGISTRY_USERNAME }}
+              registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+              name: demo-sample-app
+              location: "north eu "
