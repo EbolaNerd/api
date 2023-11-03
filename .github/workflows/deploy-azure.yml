@@ -19,4 +19,4 @@ jobs:
               registry-username: ${{ secrets.REGISTRY_USERNAME }}
               registry-password: ${{ secrets.REGISTRY_PASSWORD }}
               name: demo-sample-app
-              location: "north eu "
+              location: "north eu"

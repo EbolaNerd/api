@@ -1,14 +1,14 @@
-import { jest, beforeEach, afterEach, describe, expect, it } from "@jest/globals";
 import * as calculator from "../../../src/utils/calculator";
+import { Server } from "http";
 
 import request from "supertest";
 
-let server;
-let name;
-let phone;
-let age;
+let server: Server;
+let name: string | null;
+let phone: number | null;
+let age: number | null;
 
-let calculatorMock;
+let calculatorMock: jest.SpyInstance;
 
 const exec = () => {
    return request(server).post("/api/users").send({ name, phone, age });
@@ -83,7 +83,7 @@ describe("POST /users", () => {
       });
 
       it("should return 401 if phone is not provided", async () => {
-         phone = "";
+         phone = null;
          const response = await exec();
          expect(response.statusCode).toBe(401);
 
@@ -91,7 +91,7 @@ describe("POST /users", () => {
       });
 
       it("should return an error message if phone is not provided", async () => {
-         phone = "";
+         phone = null;
          const response = await exec();
          expect(response.text).toBe("Please provide phone number");
 
@@ -99,7 +99,7 @@ describe("POST /users", () => {
       });
 
       it("should return 401 if age is not provided", async () => {
-         age = "";
+         age = null;
          const response = await exec();
          expect(response.statusCode).toBe(401);
 
@@ -107,7 +107,7 @@ describe("POST /users", () => {
       });
 
       it("should return an error message if age is not provided", async () => {
-         age = "";
+         age = null;
          const response = await exec();
          expect(response.text).toBe("Please provide age");
 
